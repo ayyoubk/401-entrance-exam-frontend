@@ -16,16 +16,18 @@ export class Main extends Component {
       .get(
         `https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic`
       )
-      .then((res) => this.setState({ cocktailData: res.data }));
+      .then((res) => {this.setState({ cocktailData: res.data.drinks });
       console.log(this.state.cocktailData);
+    
+    });
   }
   render() {
     return (
       <Container>
-        <Row>
+        <Row xs={1} md={3}>
           {this.state.cocktailData.length &&
             this.state.cocktailData.map((item, idx) => {
-              <CocktailCard item={item} key={idx} />
+              return <CocktailCard item={item} key={idx} />;
             })}
         </Row>
       </Container>

@@ -2,19 +2,20 @@ import React, { Component } from "react";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
 export class CocktailCard extends Component {
+  addFav = (name, img, id) => {
+    const reqBody = { name, img, id };
+    axios.post(`http://localhost:8788/fav/`, reqBody);
+  };
   render() {
     return (
       <Col lg={3}>
-        <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src={this.props.item.img}/>
+        <Card>
+          <Card.Img variant="top" src={this.props.item.strDrinkThumb} />
           <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
+            <Card.Title>{this.props.item.strDrink}</Card.Title>
+            <Button variant="primary" onClick={()=>this.addFav(this.props.item.strDrink,this.props.item.strDrinkThumb,this.props.item.idDrink)}>Add to favorites</Button>
           </Card.Body>
         </Card>
       </Col>
